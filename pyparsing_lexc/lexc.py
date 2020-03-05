@@ -1,4 +1,8 @@
-"""Parse lexc using pyparsing."""
+"""Parse lexc using pyparsing.
+
+Based on https://stackoverflow.com/a/42848414/2903532. The author of the
+answer was not familiar with lexc, so some decisions may not be appropriate.
+"""
 
 import pyparsing as pp
 
@@ -62,9 +66,3 @@ parser = (pp.Optional(multichar_symbols_section)('multichar_symbols')
 # ignore comments anywhere in our parser
 comment = '!' + pp.Optional(pp.restOfLine)
 parser.ignore(comment)
-
-if __name__ == '__main__':
-    with open('../toyLEXICON.lexc') as toyLEXICONFile:
-        lex_str = toyLEXICONFile.read()
-        result = lexicon_section.parseString(lex_str)
-        print(result.dump())
